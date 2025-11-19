@@ -1,0 +1,120 @@
+/* src/pages/Transparency/Transparency.css */
+/* Overall Page Background */
+.transparency-page {
+    background: #13072e;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* Common Width for Both Gradient Boxes */
+.transparency-wrapper {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* Top Gradient Box (Text Box) */
+.transparency-header {
+    width: 90%;
+    padding: 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #13072e, #3f2182);
+    border-radius: 15px;
+    margin-bottom: -30px;
+    z-index: 2;
+}
+
+/* Outer Gradient Box (Content Container) */
+.transparency-container {
+    width: 90%;
+    background: linear-gradient(135deg, #13072e, #3f2182);
+    padding: 5rem 2rem 3rem 2rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+/* Title Styling */
+.transparency-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+/* Description */
+.transparency-description {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Documents Grid */
+.documents {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+/* Individual Document Card */
+.document-card {
+    width: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.document-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Document Image */
+.document-card img {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 1rem;
+}
+
+/* View Button */
+.view-btn {
+    background: white;
+    color: #13072e;
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.view-btn:hover {
+    background: #ddd;
+    transform: translateY(-3px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .transparency-container {
+        padding: 2rem;
+    }
+    .documents {
+        flex-direction: column;
+        align-items: center;
+    }
+}

@@ -1,0 +1,118 @@
+/* src/pages/Transaction/Transaction.css */
+.transaction-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    color: white;
+}
+
+.transaction-header-box {
+    background: linear-gradient(135deg, #13072e, #3f2182);
+    padding: 40px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 1200px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.transaction-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.transaction-description {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.transaction-box {
+    background: linear-gradient(135deg, #13072e, #3f2182);
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 1200px;
+    text-align: center;
+    overflow-x: auto; /* Scrollable for small screens */
+}
+
+.crypto-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.crypto-row {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.crypto-row td {
+    padding: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.crypto-name {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.crypto-address {
+    text-align: right;
+    padding-right: 20px;
+}
+
+/* 🔹 Responsive Design */
+@media (max-width: 768px) {
+    .transaction-title {
+        font-size: 2rem;
+    }
+
+    .transaction-description {
+        font-size: 1rem;
+        max-width: 90%;
+    }
+
+    .transaction-box {
+        padding: 20px;
+    }
+
+    .crypto-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .crypto-row td {
+        padding: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .transaction-header-box {
+        padding: 30px;
+    }
+
+    .transaction-title {
+        font-size: 1.8rem;
+    }
+
+    .transaction-description {
+        font-size: 0.9rem;
+    }
+
+    .transaction-box {
+        padding: 15px;
+    }
+
+    .crypto-row td {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+}

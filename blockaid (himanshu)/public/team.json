@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "DEEPANSHU KUMAR",
+        "image": "/team/deepanshu.jpg"
+    },
+    {
+        "id": 2,
+        "name": "HIMANSHU VASHISTHA",
+        "image": "/team/himanshu.jpg"
+    },
+    {
+        "id": 3,
+        "name": "SHARAD SINGHAL",
+        "image": "/team/sharad.jpg"
+    }
+]

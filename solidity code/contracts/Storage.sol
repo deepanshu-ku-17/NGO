@@ -1,0 +1,101 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+
+contract Storage {
+
+    // Define structure for an NGO
+    struct NGO {
+        string name;
+        address payable wallet;  // Wallet address of the NGO
+        bool isVerified;         // Status if NGO is verified
+    }
+
+    // Define structure for a Donor
+    struct Donor {
+        address wallet;
+        uint256 stakedAmount;    // Amount of ETH staked
+        bool isRegistered;
+    }
+
+    // Minimum staking amount to participate in donation
+    uint256 public minimumStake = 0.1 ether;
+
+    // Mappings to store registered NGOs and Donors
+    mapping(address => NGO) public ngos;
+    mapping(address => Donor) public donors;
+
+    // List of NGO addresses for easy iteration
+    address[] public ngoList;
+
+    // Event logs for transparency
+    event NGORegistered(string name, address wallet);
+    event DonorRegistered(address wallet, uint256 stakedAmount);
+    event DonationMade(address donor, address ngo, uint256 amount);
+
+    // Function for NGO to register
+    function registerNGO(string memory _name) public {
+        // NGO must not already be registered
+        require(!ngos[msg.sender].isVerified, "NGO already registered");
+
+        // Register and verify NGO
+        ngos[msg.sender] = NGO({
+            name: _name,
+            wallet: payable(msg.sender),
+            isVerified: true
+        });
+
+        ngoList.push(msg.sender); // Add to the NGO list
+
+        emit NGORegistered(_name, msg.sender);  // Log NGO registration
+    }
+
+    // Function for Donor to stake and register
+    function registerDonor() public payable {
+        // Check if donor is already registered
+        require(!donors[msg.sender].isRegistered, "Donor already registered");
+        // Check if the sent ETH is greater than or equal to the minimum stake
+        require(msg.value >= minimumStake, "Insufficient stake");
+
+        // Register Donor
+        donors[msg.sender] = Donor({
+            wallet: msg.sender,
+            stakedAmount: msg.value,
+            isRegistered: true
+        });
+
+        emit DonorRegistered(msg.sender, msg.value);  // Log donor registration
+    }
+
+    // Function to donate to an NGO
+    function donateToNGO(address _ngoAddress, uint256 _amount) public {
+        // Check if NGO is verified
+        require(ngos[_ngoAddress].isVerified, "NGO not verified");
+        // Check if Donor is registered and has enough staked ETH
+        require(donors[msg.sender].isRegistered, "Donor not registered");
+        require(donors[msg.sender].stakedAmount >= minimumStake, "Donor has not staked enough ETH");
+
+        // Transfer the donation amount from the donor to the NGO
+        payable(_ngoAddress).transfer(_amount);
+
+        emit DonationMade(msg.sender, _ngoAddress, _amount);  // Log the donation
+    }
+
+    // Function to withdraw staked ETH (after donating or exiting)
+    function withdrawStake() public {
+        // Check if the donor is registered and has a stake to withdraw
+        require(donors[msg.sender].isRegistered, "Donor not registered");
+        uint256 staked = donors[msg.sender].stakedAmount;
+        require(staked > 0, "No staked ETH to withdraw");
+
+        // Reset donor's staked amount
+        donors[msg.sender].stakedAmount = 0;
+        donors[msg.sender].isRegistered = false;
+
+        // Transfer staked ETH back to the donor
+        payable(msg.sender).transfer(staked);
+    }
+
+    // Fallback function to accept donations
+    receive() external payable {}
+}
